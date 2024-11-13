@@ -5,7 +5,6 @@ This program is to solve producer and consumer problems. It involves two types o
 To solve this I use semaphore (counting and binary) to synchronize producer and consumer.  I also use mutual exclusion to lock the other process when the other process try to get in. I use Shared memory is used for the “table” to keep track of buffer state
 
 ## Step:
-Step: 
 * Initial share met buffer (table) which has 2 slot 
 * Set up 3 semaphore
     * for counting semaphore to keep track empty/filled slots in buffer: sem_empty, sem_full 
@@ -38,7 +37,9 @@ Step:
 
 ## Instruction to run on your local machine
 `g++ producer.cpp -pthread -o producer`
+
 `g++ consumer.cpp -pthread -o consume`
+
 `./producer & ./consumer &`
 
 ## Example:
