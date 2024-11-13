@@ -14,11 +14,11 @@ To solve this, I use **semaphore** (counting and binary) to synchronize producer
     - Create a shared memory buffer (table) that has two slots (each slot can hold 1 item). The buffer is shared to allow processes to communicate
 
 2. Semaphore setup:
-    - Counting semaphore to keep track empty/filled slots in buffer: `sem_empty`, `sem_full`
-    - Binary semaphore (acting as a mutex) to do mutual exclusion, so that only 1 process  accesses the buffer at a time: `sem_mutex`
-        * `sem_full`: Initialized to 0, so there are no items in the buffer at the beginning
-        * `sem_empty`: Initialized to TABLE_SIZE (2), so the buffer has two empty slots initially
-        * `sem_mutex`: Initialized to 1, as a binary semaphore for mutual exclusion
+    - Counting semaphore:
+        * `sem_full`: keep track the number of empty slots in the buffer. Initialized to `TABLE_SIZE (2)`, indicating that the buffer starts with 2 empty slots
+        * `sem_empty`: keep track the number of filled slots in the buffer. Initialized to 0, indicating there are no item in the buffer from the beginning
+    - Binary semaphore (acting as a mutex)
+        * `sem_mutex`: to do mutual exclusion, so that only 1 process accesses the buffer at a time. Initialized to 1, allowing access to CS by 1 process
 
 3. Shared Memory setup: 
     - `shm_open` to opens or creates a shared memory object, allowing both processes to access the same buffer
